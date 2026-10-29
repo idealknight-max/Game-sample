@@ -1,0 +1,6 @@
+{
+  "name": "PolyZone: Open World Gunner",
+  "description": "Multiplayer 3D open-world shooter featuring Assault, Sniper, and Pistol weapons, tactical bot combat, real-time multi-tab networking, and procedural audio.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
