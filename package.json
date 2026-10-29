@@ -9,7 +9,8 @@
     "build:android": "vite build && cap sync android",
     "preview": "vite preview",
     "clean": "rm -rf dist server.js android",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit",
+    "postinstall": "node -e \"const fs=require('fs'); const p='node_modules/@capacitor/android/capacitor/build.gradle'; if(fs.existsSync(p)){let c=fs.readFileSync(p,'utf8'); c=c.replace(/VERSION_21/g,'VERSION_17'); fs.writeFileSync(p,c);}\""
   },
   "dependencies": {
     "@capacitor/core": "^8.6.0",

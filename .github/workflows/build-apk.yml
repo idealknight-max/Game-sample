@@ -53,6 +53,11 @@ jobs:
       - name: Sync Capacitor Android
         run: npx cap sync android
 
+      - name: Patch Capacitor to Java 17
+        run: |
+          node -e "const fs=require('fs'); const p='node_modules/@capacitor/android/capacitor/build.gradle'; if(fs.existsSync(p)){let c=fs.readFileSync(p,'utf8'); c=c.replace(/VERSION_21/g,'VERSION_17'); fs.writeFileSync(p,c); console.log('Patched capacitor-android to Java 17');}"
+          node -e "const fs=require('fs'); const p='android/capacitor-cordova-android-plugins/build.gradle'; if(fs.existsSync(p)){let c=fs.readFileSync(p,'utf8'); c=c.replace(/VERSION_21/g,'VERSION_17'); fs.writeFileSync(p,c); console.log('Patched cordova-plugins to Java 17');}"
+
       - name: Build Android APK with Gradle
         run: |
           cd android
