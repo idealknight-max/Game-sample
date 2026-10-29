@@ -1,0 +1,20 @@
+{
+  "id": "/",
+  "name": "PolyZone: Open World Gunner",
+  "short_name": "PolyZone",
+  "description": "Multiplayer 3D open-world shooter featuring Assault, Sniper, and Pistol weapons, tactical bot combat, and procedural audio.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "fullscreen",
+  "orientation": "landscape",
+  "theme_color": "#0a0d14",
+  "background_color": "#0a0d14",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
