@@ -160,6 +160,7 @@ export function buildCharacterModel(teamColorHex: number, weaponType: WeaponId):
   overheadSprite.position.set(0, 2.3, 0);
   overheadSprite.scale.set(1.6, 0.4, 1);
   overheadSprite.name = 'overheadSprite';
+  overheadSprite.raycast = () => {}; // UI sprite should not intercept bullet raycasts
   group.add(overheadSprite);
 
   return group;

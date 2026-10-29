@@ -387,6 +387,7 @@ export class GameEngine {
 
     _raycaster.set(_camWorldPos, _dir);
     _raycaster.far = wep.range;
+    _raycaster.camera = this.camera;
 
     // Targets: world shootable meshes + bots
     const targets: THREE.Object3D[] = [...this.world.shootableMeshes];
