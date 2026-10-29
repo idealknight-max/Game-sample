@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { HUD } from './components/HUD';
 import { GameOverModal, PauseModal } from './components/Modals';
 import { TitleScreen } from './components/TitleScreen';
+import { TouchControls } from './components/TouchControls';
 import { soundController } from './game/audio';
 import { GameEngine } from './game/engine';
 import { networkManager } from './game/network';
@@ -171,21 +172,28 @@ export default function App() {
 
       {/* 3. In-Game Low-Occlusion HUD Overlay */}
       {phase === 'playing' && (
-        <HUD
-          health={health}
-          armor={armor}
-          inventory={inventory}
-          stats={stats}
-          isScoped={isScoped}
-          scopedWeapon={scopedWeapon}
-          killfeed={killfeed}
-          showHitmarker={showHitmarker}
-          hitmarkerHeadshot={hitmarkerHeadshot}
-          damageDirection={damageDirection}
-          onSwitchWeapon={handleSwitchWeapon}
-          onToggleMute={handleToggleMute}
-          isMuted={isMuted}
-        />
+        <>
+          <HUD
+            health={health}
+            armor={armor}
+            inventory={inventory}
+            stats={stats}
+            isScoped={isScoped}
+            scopedWeapon={scopedWeapon}
+            killfeed={killfeed}
+            showHitmarker={showHitmarker}
+            hitmarkerHeadshot={hitmarkerHeadshot}
+            damageDirection={damageDirection}
+            onSwitchWeapon={handleSwitchWeapon}
+            onToggleMute={handleToggleMute}
+            isMuted={isMuted}
+          />
+          <TouchControls
+            engine={engineRef.current}
+            onSwitchWeapon={handleSwitchWeapon}
+            currentWeapon={inventory.currentWeapon}
+          />
+        </>
       )}
 
       {/* 4. TAB Tactical Leaderboard Overlay */}

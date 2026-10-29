@@ -84,6 +84,7 @@ export class GameEngine {
 
   // Controls state
   private keys: Record<string, boolean> = {};
+  public touchMove = { x: 0, y: 0 };
   private isMouseDown = false;
   private isRightMouseDown = false;
   private isReloading = false;
@@ -584,6 +585,10 @@ export class GameEngine {
     if (this.keys['KeyS']) _v1.z += 1;
     if (this.keys['KeyA']) _v1.x -= 1;
     if (this.keys['KeyD']) _v1.x += 1;
+    if (this.touchMove.x !== 0 || this.touchMove.y !== 0) {
+      _v1.x += this.touchMove.x;
+      _v1.z += this.touchMove.y;
+    }
 
     if (_v1.lengthSq() > 0) {
       _v1.normalize();
@@ -831,6 +836,34 @@ export class GameEngine {
         this.scene.remove(obj);
         this.remotePlayerObjects.delete(id);
       }
+    }
+  }
+
+  public addTouchLook(dx: number, dy: number) {
+    const isScoped = this.isRightMouseDown && this.inventory.currentWeapon === 'sniper';
+    const sens = isScoped ? 0.0022 : 0.0055;
+    this.yaw -= dx * sens;
+    this.pitch -= dy * sens;
+    this.pitch = Math.max(-Math.PI / 2.1, Math.min(Math.PI / 2.1, this.pitch));
+  }
+
+  public setTouchShoot(shooting: boolean) {
+    this.isMouseDown = shooting;
+    if (shooting) {
+      const currentWep = WEAPONS[this.inventory.currentWeapon];
+      if (!currentWep.isAutomatic) {
+        this.tryShoot();
+      }
+    }
+  }
+
+  public toggleTouchAim() {
+    this.isRightMouseDown = !this.isRightMouseDown;
+  }
+
+  public touchJump() {
+    if (Math.abs(this.playerVelocity.y) < 0.1 && this.playerPos.y <= 1.75) {
+      this.playerVelocity.y = 6.2;
     }
   }
 
